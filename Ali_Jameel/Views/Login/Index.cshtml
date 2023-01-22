@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!doctype html>
+
+    <form id="loginform" method="post">
+        <div id="login" class="text-center container">
+            <div class="card" style=" width:500px; padding:50px; margin-top:20px; justify-content: center">
+                <img src="~/Content/carebibi-logo-01-1200x1200.jpeg" width="150" height="100" style="padding-bottom: 20px;margin-left:120px;" />
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+
+                        <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" style="border:5px solid">
+                        <br />
+
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" style="border:5px solid">
+                        <br />
+                        <button class="btn btn-lg btn-primary btn-block " type="submit" style="border:5px solid">Sign in</button>
+                        <script>
+
+
+                            $("loginform").submit(function () {
+                                alert('submit');
+                            });
+                            //var username = document.getElementById('inputEmail');
+                            //var password = document.getElementById('password');
+
+                            function login() {
+                                alert('test');
+                            }
+
+                        </script>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
