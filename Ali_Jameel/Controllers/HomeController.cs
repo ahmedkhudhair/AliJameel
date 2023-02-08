@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ali_Jameel.Models;
+using System.Data;
+using System.IO;
 
 namespace Ali_Jameel.Controllers
 {
@@ -10,27 +13,73 @@ namespace Ali_Jameel.Controllers
     {
         public ActionResult Index()
         {
+
             return View();
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult Vendors()
         {
-            ViewBag.Message = "Your application description page.";
+            DBMS db = new DBMS();
+            DataTable table = db.ExecuteSelectQuery("select * from vendor");
 
-            return View();
+            List<Vendor> Vendors = new List<Vendor>();
+            foreach (DataRow item in table.Rows)
+            {
+                Vendor Vendor = new Vendor();
+                Vendor.CompanyName = item["CompanyName"].ToString();
+                Vendor.LogoName = "\\Content\\Logos\\" + item["CompanyLogo"].ToString(); // System.Web.HttpContext.Current.Server.MapPath("~//Content//Logos//") 
+                Vendor.CompanyURL = item["CompanyURL"].ToString();
+                Vendor.Email = item["Email"].ToString();
+                Vendor.Address = item["Address"].ToString();
+                Vendor.ContactNumber = item["ContactNumber"].ToString();
+                Vendors.Add(Vendor);
+            }
+
+            return View(Vendors);
         }
 
-        public ActionResult Contact()
+
+        [HttpGet]
+        public ActionResult CreateVendors()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
-        public ActionResult Login()
+        [HttpPost]
+        public ActionResult CreateVendors(Vendor vendor)
         {
+
+            DBMS db = new DBMS();
+
+            var filename = Path.GetFileName(vendor.LogoPath.FileName);
+            var path = Path.Combine(Server.MapPath("~/Content/Logos/"), filename);
+            vendor.LogoPath.SaveAs(path);
+
+            bool ok = db.ExecuteInsertQuery($" insert into vendor (CompanyName,CompanyLogo) values ('{vendor.CompanyName}' ,'{vendor.LogoPath.FileName}')");
             return View();
         }
+
+        //public ActionResult About()
+        //{
+        //    ViewBag.Message = "Your application description page.";
+
+        //    return View();
+        //}
+
+        //public ActionResult Contact()
+        //{
+        //    ViewBag.Message = "Your contact page.";
+
+        //    return View();
+        //}
+
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
+
+
 
 
     }

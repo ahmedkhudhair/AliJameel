@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="Models\DBMS.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +177,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carebibi-logo-01-1200x1200.jpeg" />
+    <Content Include="Content\Logos\download.jfif" />
+    <Content Include="Content\Logos\home-page-logo-03.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -209,6 +212,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\Vendors.cshtml" />
+    <Content Include="Views\Home\CreateVendors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
