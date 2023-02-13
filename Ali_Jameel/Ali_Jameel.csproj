@@ -214,6 +214,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\Vendors.cshtml" />
     <Content Include="Views\Home\CreateVendors.cshtml" />
+    <Content Include="Views\Home\News.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -60,6 +60,14 @@ namespace Ali_Jameel.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public ActionResult News()
+        {
+            return View();
+        }
+
+
         //public ActionResult About()
         //{
         //    ViewBag.Message = "Your application description page.";
