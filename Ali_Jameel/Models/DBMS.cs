@@ -49,33 +49,29 @@ namespace Ali_Jameel.Models
             return ok;
         }
 
-        //public bool ExecuteInsertQuery(string post_title, Byte[] data)
-        //{
-        //    Mysql mysqlConnProp = new Mysql();
-        //    bool ok = false;
-        //    if (mysqlConnProp.OpenConnection())
-        //    {
+        public bool ExecuteInsertQuery(News News)
+        {
+            Mysql mysqlConnProp = new Mysql();
+            bool ok = false;
+            if (mysqlConnProp.OpenConnection())
+            {
 
+                String query = $"insert into news (Title,description,logo,WebsiteLink,htmlContent) values ('{News.Title}'  , '{News.Description}','{News.LogoPath.FileName}' , '{News.WebsiteLink}', @Text)";
 
+                //Create Command
+                MySqlCommand command = new MySqlCommand(query, mysqlConnProp.Connection);
+                command.Parameters.AddWithValue("@Text", News.HtmlContent);
 
-        //        String query = "INSERT INTO post (post_title,poststream) VALUES (@post_title,@poststream)";
-
-        //        //Create Command
-        //        MySqlCommand command = new MySqlCommand(query, mysqlConnProp.Connection);
-        //        command.Parameters.Add("@post_title", MySqlDbType.String).Value = post_title;
-        //        command.Parameters.Add("@poststream", MySqlDbType.Blob).Value = data;
-
-
-        //        //Create a data reader and Execute the command
-        //        int rowsnumber = command.ExecuteNonQuery();
-        //        mysqlConnProp.CloseConnection();
-        //        if (rowsnumber > -1)
-        //        {
-        //            ok = true;
-        //        }
-        //    }
-        //    return ok;
-        //}
+                //Create a data reader and Execute the command
+                int rowsnumber = command.ExecuteNonQuery();
+                mysqlConnProp.CloseConnection();
+                if (rowsnumber > -1)
+                {
+                    ok = true;
+                }
+            }
+            return ok;
+        }
     }
 
     public class Mysql

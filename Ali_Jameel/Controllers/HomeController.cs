@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Ali_Jameel.Models;
 using System.Data;
 using System.IO;
+using System.Text;
 
 namespace Ali_Jameel.Controllers
 {
@@ -64,31 +65,47 @@ namespace Ali_Jameel.Controllers
         [HttpGet]
         public ActionResult News()
         {
+
+            DBMS db = new DBMS();
+            DataTable table = db.ExecuteSelectQuery("select * from News");
+
+            List<News> News = new List<News>();
+            foreach (DataRow item in table.Rows)
+            {
+                News singleNews = new News();
+                singleNews.Title = item["title"].ToString();
+                singleNews.Description = item["description"].ToString();
+                singleNews.WebsiteLink = item["WebsiteLink"].ToString();
+                singleNews.LogoName = "\\Content\\Logos\\" + item["logo"].ToString();
+                singleNews.HtmlContent = item["htmlContent"].ToString();
+                News.Add(singleNews);
+            }
+            return View(News);
+        }
+
+
+
+        [HttpGet]
+        public ActionResult CreateNews()
+        {
             return View();
         }
 
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
+        [HttpPost]
+        public ActionResult CreateNews(News News)
+        {
+           
+            var filename = Path.GetFileName(News.LogoPath.FileName);
+            var path = Path.Combine(Server.MapPath("~/Content/News/logos/"), filename);
+            News.LogoPath.SaveAs(path);
 
-        //    return View();
-        //}
+            News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
 
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
+            DBMS db = new DBMS();
+            bool ok = db.ExecuteInsertQuery(News);
 
-        //    return View();
-        //}
-
-        //public ActionResult Login()
-        //{
-        //    return View();
-        //}
-
-
-
-
+            return View();
+        }
     }
 }

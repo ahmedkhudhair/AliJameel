@@ -167,6 +167,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBMS.cs" />
+    <Compile Include="Models\News.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -215,9 +216,13 @@
     <Content Include="Views\Home\Vendors.cshtml" />
     <Content Include="Views\Home\CreateVendors.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
+    <Content Include="Views\Home\CreateNews.cshtml" />
+    <Content Include="Views\Home\News_.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\News\files\" />
+    <Folder Include="Content\News\logos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
