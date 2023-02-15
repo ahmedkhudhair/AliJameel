@@ -15,9 +15,7 @@ namespace Ali_Jameel.Models
 
         public string Description { get; set; }
 
-
         public string LogoName { get; set; }
-
 
         public HttpPostedFileBase LogoPath { get; set; }
 
