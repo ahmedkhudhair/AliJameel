@@ -53,23 +53,34 @@ namespace Ali_Jameel.Models
         {
             Mysql mysqlConnProp = new Mysql();
             bool ok = false;
-            if (mysqlConnProp.OpenConnection())
+
+            try
             {
-
-                String query = $"insert into news (Title,description,logo,WebsiteLink,htmlContent) values ('{News.Title}'  , '{News.Description}','{News.LogoPath.FileName}' , '{News.WebsiteLink}', @Text)";
-
-                //Create Command
-                MySqlCommand command = new MySqlCommand(query, mysqlConnProp.Connection);
-                command.Parameters.AddWithValue("@Text", News.HtmlContent);
-
-                //Create a data reader and Execute the command
-                int rowsnumber = command.ExecuteNonQuery();
-                mysqlConnProp.CloseConnection();
-                if (rowsnumber > -1)
+                if (mysqlConnProp.OpenConnection())
                 {
-                    ok = true;
+
+                    String query = $"insert into news (Title,description,logo,WebsiteLink,htmlContent) values (@TitleText  , @DescriptionText,'{News.LogoPath.FileName}' , '{News.WebsiteLink}', @htmlText)";
+
+                    //Create Command
+                    MySqlCommand command = new MySqlCommand(query, mysqlConnProp.Connection);
+                    command.Parameters.AddWithValue("@htmlText", News.HtmlContent);
+                    command.Parameters.AddWithValue("@TitleText", News.Title);
+                    command.Parameters.AddWithValue("@DescriptionText", News.Description);
+
+                    //Create a data reader and Execute the command
+                    int rowsnumber = command.ExecuteNonQuery();
+                    mysqlConnProp.CloseConnection();
+                    if (rowsnumber > -1)
+                    {
+                        ok = true;
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return ok;
         }
     }
