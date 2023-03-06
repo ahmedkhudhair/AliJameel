@@ -59,7 +59,7 @@ namespace Ali_Jameel.Models
                 if (mysqlConnProp.OpenConnection())
                 {
 
-                    String query = $"insert into news (Title,description,logo,WebsiteLink,htmlContent) values (@TitleText  , @DescriptionText,'{News.LogoPath.FileName}' , '{News.WebsiteLink}', @htmlText)";
+                    String query = $"insert into news (Title,description,logo,WebsiteLink,htmlContent,DateTime) values (@TitleText  , @DescriptionText,'{News.LogoPath.FileName}' , '{News.WebsiteLink}', @htmlText)";
 
                     //Create Command
                     MySqlCommand command = new MySqlCommand(query, mysqlConnProp.Connection);

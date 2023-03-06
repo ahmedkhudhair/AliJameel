@@ -22,7 +22,8 @@ namespace Ali_Jameel.Controllers
             bool ok = user.SignIn();
             if (ok)
             {
-                TempData["Message"] = "Success";
+                Session["username"] = user.UserName;
+                return RedirectToAction("Home", "Login");
             }
             else
             {

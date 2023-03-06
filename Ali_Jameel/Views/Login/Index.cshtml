@@ -2,6 +2,7 @@
 @model Ali_Jameel.Models.User
 
 @{
+    
     Layout = null;
 }
 
@@ -58,7 +59,11 @@
                     <br />
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     <br />
-                    @ViewBag.Message
+
+                    <FONT COLOR="red">
+                        @TempData["Message"]
+                    </FONT>
+
                 }
 
             </div>
@@ -86,11 +91,15 @@
 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
                     <br />
-                    @ViewBag.Message
-                }
+                    
+                    
+                        <FONT COLOR="red">
+                        @TempData["Message"]
+                        </FONT>
+                 }
 
-                <p class="mt-5 mb-3 text-muted">©Ahmed Khudhair</p>
-            </div>
+                 <p class="mt-5 mb-3 text-muted">©Ali Jameel</p>
+</div>
         </div>
 
 

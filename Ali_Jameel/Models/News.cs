@@ -9,6 +9,7 @@ namespace Ali_Jameel.Models
 {
     public class News
     {
+
         public int ID { get; set; }
 
         public string Title { get; set; }
@@ -22,6 +23,8 @@ namespace Ali_Jameel.Models
         public string WebsiteLink { get; set; }
 
         public string HtmlContent { get; set; }
+
+        public DateTime DateTime { get; set; }
 
         public string Make_HTTP_Request(string url)
         {
@@ -37,6 +40,7 @@ namespace Ali_Jameel.Models
             }
             return html;
         }
+
 
     }
 }
