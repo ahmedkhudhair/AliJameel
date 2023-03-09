@@ -60,9 +60,8 @@
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                     <br />
 
-                    <FONT COLOR="red">
                         @TempData["Message"]
-                    </FONT>
+                   
 
                 }
 
@@ -80,9 +79,6 @@
                     @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @required = "", @autofocus = "", @placeholder = "Email address", @id = "inputEmail", @type = "email" })
                     <br />
 
-                    @Html.TextBoxFor(x => x.DateOfBirth, new { @class = "form-control", @required = "", @autofocus = "", @placeholder = "Date Of Birth", @id = "DateOfBirth", @type = "date" })
-                    <br />
-
                     @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @required = "", @autofocus = "", @placeholder = "User Name", @id = "UserName", @type = "text" })
                     <br />
 
@@ -91,11 +87,9 @@
 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
                     <br />
-                    
-                    
-                        <FONT COLOR="red">
+                        
                         @TempData["Message"]
-                        </FONT>
+                        
                  }
 
                  <p class="mt-5 mb-3 text-muted">©Ali Jameel</p>

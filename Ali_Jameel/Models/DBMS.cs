@@ -49,6 +49,25 @@ namespace Ali_Jameel.Models
             return ok;
         }
 
+        public bool ExecuteDeleteQuery(string query)
+        {
+            Mysql mysqlConnProp = new Mysql();
+            bool ok = false;
+            if (mysqlConnProp.OpenConnection())
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, mysqlConnProp.Connection);
+                //Create a data reader and Execute the command
+                int rowsnumber = cmd.ExecuteNonQuery();
+                mysqlConnProp.CloseConnection();
+                if (rowsnumber > -1)
+                {
+                    ok = true;
+                }
+            }
+            return ok;
+        }
+
         public bool ExecuteInsertQuery(News News)
         {
             Mysql mysqlConnProp = new Mysql();
@@ -59,7 +78,7 @@ namespace Ali_Jameel.Models
                 if (mysqlConnProp.OpenConnection())
                 {
 
-                    String query = $"insert into news (Title,description,logo,WebsiteLink,htmlContent,DateTime) values (@TitleText  , @DescriptionText,'{News.LogoPath.FileName}' , '{News.WebsiteLink}', @htmlText)";
+                    String query = $"insert into news (Title,description,logo,WebsiteLink,htmlContent,PublishDate) values (@TitleText  , @DescriptionText,'{News.LogoPath.FileName}' , '{News.WebsiteLink}', @htmlText,'{News.PublishDate}')";
 
                     //Create Command
                     MySqlCommand command = new MySqlCommand(query, mysqlConnProp.Connection);

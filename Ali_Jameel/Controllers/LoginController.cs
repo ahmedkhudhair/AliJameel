@@ -23,7 +23,7 @@ namespace Ali_Jameel.Controllers
             if (ok)
             {
                 Session["username"] = user.UserName;
-                return RedirectToAction("Home", "Login");
+                return RedirectToAction("index", "main");
             }
             else
             {

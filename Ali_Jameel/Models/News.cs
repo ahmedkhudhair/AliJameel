@@ -24,7 +24,7 @@ namespace Ali_Jameel.Models
 
         public string HtmlContent { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public string PublishDate { get; set; } = DateTime.Now.ToString();
 
         public string Make_HTTP_Request(string url)
         {

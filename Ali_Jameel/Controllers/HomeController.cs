@@ -73,19 +73,30 @@ namespace Ali_Jameel.Controllers
             foreach (DataRow item in table.Rows)
             {
                 News singleNews = new News();
+                singleNews.ID = (int)item["ID"];
                 singleNews.Title = item["title"].ToString();
                 singleNews.Description = item["description"].ToString();
                 singleNews.WebsiteLink = item["WebsiteLink"].ToString();
                 singleNews.LogoName = "\\Content\\Logos\\" + item["logo"].ToString();
                 singleNews.HtmlContent = item["htmlContent"].ToString();
+                singleNews.PublishDate = item["PublishDate"].ToString();
                 News.Add(singleNews);
             }
             return View(News);
         }
 
 
-
         [HttpGet]
+        public bool DeleteNews(int newsID)
+        {
+            bool ok = false;
+            DBMS db = new DBMS();
+            ok = db.ExecuteDeleteQuery($"DELETE FROM news WHERE ID = '{newsID}'");
+            return ok;
+        }
+
+
+    [HttpGet]
         public ActionResult CreateNews()
         {
             return View();
