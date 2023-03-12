@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,8 +19,10 @@ namespace Ali_Jameel.Models
 
         public string LogoName { get; set; }
 
+        [Required(ErrorMessage = "Please select file.")]
         public HttpPostedFileBase LogoPath { get; set; }
 
+        [Required(ErrorMessage = "Please Enter Website Link.")]
         public string WebsiteLink { get; set; }
 
         public string HtmlContent { get; set; }

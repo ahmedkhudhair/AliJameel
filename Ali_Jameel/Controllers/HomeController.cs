@@ -28,6 +28,7 @@ namespace Ali_Jameel.Controllers
             foreach (DataRow item in table.Rows)
             {
                 Vendor Vendor = new Vendor();
+                Vendor.ID = (int)item["ID"];
                 Vendor.CompanyName = item["CompanyName"].ToString();
                 Vendor.LogoName = "\\Content\\Logos\\" + item["CompanyLogo"].ToString(); // System.Web.HttpContext.Current.Server.MapPath("~//Content//Logos//") 
                 Vendor.CompanyURL = item["CompanyURL"].ToString();
@@ -38,6 +39,16 @@ namespace Ali_Jameel.Controllers
             }
 
             return View(Vendors);
+        }
+
+
+        [HttpGet]
+        public bool DeleteVendors(int VendorID)
+        {
+            bool ok = false;
+            DBMS db = new DBMS();
+            ok = db.ExecuteDeleteQuery($"DELETE FROM vendor WHERE ID = '{VendorID}'");
+            return ok;
         }
 
 
@@ -106,16 +117,15 @@ namespace Ali_Jameel.Controllers
         [HttpPost]
         public ActionResult CreateNews(News News)
         {
-           
-            var filename = Path.GetFileName(News.LogoPath.FileName);
-            var path = Path.Combine(Server.MapPath("~/Content/News/logos/"), filename);
-            News.LogoPath.SaveAs(path);
-
-            News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
-
-            DBMS db = new DBMS();
-            bool ok = db.ExecuteInsertQuery(News);
-
+            if (ModelState.IsValid)
+            {
+                var filename = Path.GetFileName(News.LogoPath.FileName);
+                var path = Path.Combine(Server.MapPath("~/Content/News/logos/"), filename);
+                News.LogoPath.SaveAs(path);
+                News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
+                DBMS db = new DBMS();
+                bool ok = db.ExecuteInsertQuery(News);
+            }
             return View();
         }
     }

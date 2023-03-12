@@ -85,15 +85,19 @@
                     @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @required = "", @autofocus = "", @placeholder = "Password", @id = "Password", @type = "password" })
                     <br />
 
+                    <label>Is Admin ? </label>
+                    @Html.CheckBoxFor(m => m.IsAdmin, new { @placeholder = "Is Admin" })
+                    <br />
+                    <br />
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
                     <br />
-                        
-                        @TempData["Message"]
-                        
-                 }
 
-                 <p class="mt-5 mb-3 text-muted">©Ali Jameel</p>
-</div>
+                    @TempData["Message"]
+
+                }
+
+                <p class="mt-5 mb-3 text-muted">©Ali Jameel</p>
+            </div>
         </div>
 
 

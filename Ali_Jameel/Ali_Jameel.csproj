@@ -267,7 +267,7 @@
     <Content Include="Content\carebibi-logo-01-1200x1200.jpeg" />
     <Content Include="Content\Logos\123.jfif" />
     <Content Include="Content\Logos\1324.jfif" />
-    <Content Include="Content\Logos\delete.png" />
+    <Content Include="Content\Logos\delete %281%29.png" />
     <Content Include="Content\Logos\download %281%29.jfif" />
     <Content Include="Content\Logos\download.jfif" />
     <Content Include="Content\Logos\list.png" />
@@ -323,12 +323,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Home\Vendors.cshtml" />
     <Content Include="Views\Home\CreateVendors.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\CreateNews.cshtml" />
     <Content Include="Views\Home\News_.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Home\Vendors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,6 +7,8 @@ namespace Ali_Jameel.Models
 {
     public class Vendor
     {
+        public int ID { get; set; }
+
         public string CompanyName { get; set; }
 
         public string LogoName { get; set; }

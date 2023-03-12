@@ -64,6 +64,9 @@ namespace Ali_Jameel.Models
             }
 
         }
+
+        public bool IsAdmin { get; set; }
+
         DBMS db = new DBMS();
 
         public bool SignIn()
@@ -89,7 +92,7 @@ namespace Ali_Jameel.Models
             try
             {
                 bool Ok = false;
-                Ok = db.ExecuteInsertQuery($"insert into user (`fullname`, `email`, `username`, `password`)  VALUES ('{FullName}','{Email}','{UserName}' ,'{ Password }' ) ");
+                Ok = db.ExecuteInsertQuery($"insert into user (`fullname`, `email`, `username`, `password`,`Role`)  VALUES ('{FullName}','{Email}','{UserName}' ,'{ Password }' , { IsAdmin }) ");
                 return Ok;
             }
             catch (Exception ex)
