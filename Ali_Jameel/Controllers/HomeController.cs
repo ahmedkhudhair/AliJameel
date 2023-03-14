@@ -76,6 +76,10 @@ namespace Ali_Jameel.Controllers
         [HttpGet]
         public ActionResult News()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             DBMS db = new DBMS();
             DataTable table = db.ExecuteSelectQuery("select * from News");
@@ -122,7 +126,7 @@ namespace Ali_Jameel.Controllers
                 var filename = Path.GetFileName(News.LogoPath.FileName);
                 var path = Path.Combine(Server.MapPath("~/Content/News/logos/"), filename);
                 News.LogoPath.SaveAs(path);
-                News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
+                //News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
                 DBMS db = new DBMS();
                 bool ok = db.ExecuteInsertQuery(News);
             }

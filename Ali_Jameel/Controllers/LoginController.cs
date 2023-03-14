@@ -19,11 +19,12 @@ namespace Ali_Jameel.Controllers
         [HttpGet]
         public ActionResult SignIn(User user)
         {
+            
             bool ok = user.SignIn();
             if (ok)
             {
                 Session["username"] = user.UserName;
-                return RedirectToAction("index", "main");
+                return RedirectToAction("news", "Home");
             }
             else
             {
