@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -50,6 +52,7 @@ namespace Ali_Jameel.Models
 
         private string _Password;
 
+        
         public string Password 
         {
             get
@@ -65,21 +68,30 @@ namespace Ali_Jameel.Models
 
         }
 
+        [TempData]
+        public string Message { get; set; }
+
+
         public bool IsAdmin { get; set; }
 
         DBMS db = new DBMS();
 
-        public bool SignIn()
+        public Tuple<bool,string> SignIn()
         {
-            bool Ok = false;
+            
             try
             {
-                var table = db.ExecuteSelectQuery($"select userid from user where email = '{Email}' and password = '{Password}' or username='{UserName}' and password='{Password}'");
+                var table = db.ExecuteSelectQuery($"select username from user where email = '{Email}' and password = '{Password}'");
                 if (table.Rows.Count > 0)
                 {
-                    Ok = true;
+                    return Tuple.Create(true, table.Rows[0]["username"].ToString());
                 }
-                return Ok;
+                else
+                {
+                    return Tuple.Create(false, "");
+
+                }
+                
             }
             catch (Exception)
             {
@@ -101,32 +113,6 @@ namespace Ali_Jameel.Models
                 throw;
             }
         }
-        //public static string EncodePasswordToBase64(string password)
-        //{
-        //    try
-        //    {
-        //        byte[] encData_byte = new byte[password.Length];
-        //        encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
-        //        string encodedData = Convert.ToBase64String(encData_byte);
-        //        return encodedData;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Error in base64Encode" + ex.Message);
-        //    }
-        //}
-
-        //public string DecodeFrom64(string encodedData)
-        //{
-        //    System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
-        //    System.Text.Decoder utf8Decode = encoder.GetDecoder();
-        //    byte[] todecode_byte = Convert.FromBase64String(encodedData);
-        //    int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
-        //    char[] decoded_char = new char[charCount];
-        //    utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
-        //    string result = new String(decoded_char);
-        //    return result;
-        //}
 
     }
 }

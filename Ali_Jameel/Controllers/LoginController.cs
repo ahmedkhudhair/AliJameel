@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ali_Jameel.Models;
+using Microsoft.AspNetCore.Session;
 
 namespace Ali_Jameel.Controllers
 {
@@ -20,10 +21,11 @@ namespace Ali_Jameel.Controllers
         public ActionResult SignIn(User user)
         {
             
-            bool ok = user.SignIn();
-            if (ok)
+            Tuple<bool,string> ok = user.SignIn();
+            if (ok.Item1)
             {
-                Session["username"] = user.UserName;
+                System.Web.HttpContext.Current.Session["Username"] = ok.Item2;
+                //TempData["Username"] = ok.Item2;
                 return RedirectToAction("news", "Home");
             }
             else

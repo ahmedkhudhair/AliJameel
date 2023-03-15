@@ -21,24 +21,34 @@ namespace Ali_Jameel.Controllers
         [HttpGet]
         public ActionResult Vendors()
         {
-            DBMS db = new DBMS();
-            DataTable table = db.ExecuteSelectQuery("select * from vendor");
-
-            List<Vendor> Vendors = new List<Vendor>();
-            foreach (DataRow item in table.Rows)
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
             {
-                Vendor Vendor = new Vendor();
-                Vendor.ID = (int)item["ID"];
-                Vendor.CompanyName = item["CompanyName"].ToString();
-                Vendor.LogoName = "\\Content\\Logos\\" + item["CompanyLogo"].ToString(); // System.Web.HttpContext.Current.Server.MapPath("~//Content//Logos//") 
-                Vendor.CompanyURL = item["CompanyURL"].ToString();
-                Vendor.Email = item["Email"].ToString();
-                Vendor.Address = item["Address"].ToString();
-                Vendor.ContactNumber = item["ContactNumber"].ToString();
-                Vendors.Add(Vendor);
+
+                DBMS db = new DBMS();
+                DataTable table = db.ExecuteSelectQuery("select * from vendor");
+
+                List<Vendor> Vendors = new List<Vendor>();
+                foreach (DataRow item in table.Rows)
+                {
+                    Vendor Vendor = new Vendor();
+                    Vendor.ID = (int)item["ID"];
+                    Vendor.CompanyName = item["CompanyName"].ToString();
+                    Vendor.LogoName = "\\Content\\Logos\\" + item["CompanyLogo"].ToString(); // System.Web.HttpContext.Current.Server.MapPath("~//Content//Logos//") 
+                    Vendor.CompanyURL = item["CompanyURL"].ToString();
+                    Vendor.Email = item["Email"].ToString();
+                    Vendor.Address = item["Address"].ToString();
+                    Vendor.ContactNumber = item["ContactNumber"].ToString();
+                    Vendors.Add(Vendor);
+                }
+                return View(Vendors);
+            }
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
             }
 
-            return View(Vendors);
+
         }
 
 
@@ -76,28 +86,31 @@ namespace Ali_Jameel.Controllers
         [HttpGet]
         public ActionResult News()
         {
-            if (Session["username"] == null)
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
             {
+                DBMS db = new DBMS();
+                DataTable table = db.ExecuteSelectQuery("select * from News");
+
+                List<News> News = new List<News>();
+                foreach (DataRow item in table.Rows)
+                {
+                    News singleNews = new News();
+                    singleNews.ID = (int)item["ID"];
+                    singleNews.Title = item["title"].ToString();
+                    singleNews.Description = item["description"].ToString();
+                    singleNews.WebsiteLink = item["WebsiteLink"].ToString();
+                    singleNews.LogoName = "\\Content\\Logos\\" + item["logo"].ToString();
+                    singleNews.HtmlContent = item["htmlContent"].ToString();
+                    singleNews.PublishDate = item["PublishDate"].ToString();
+                    News.Add(singleNews);
+                }
+                return View(News);
+            }
+            else
+            {
+                //return View();
                 return RedirectToAction("Index", "Login");
             }
-
-            DBMS db = new DBMS();
-            DataTable table = db.ExecuteSelectQuery("select * from News");
-
-            List<News> News = new List<News>();
-            foreach (DataRow item in table.Rows)
-            {
-                News singleNews = new News();
-                singleNews.ID = (int)item["ID"];
-                singleNews.Title = item["title"].ToString();
-                singleNews.Description = item["description"].ToString();
-                singleNews.WebsiteLink = item["WebsiteLink"].ToString();
-                singleNews.LogoName = "\\Content\\Logos\\" + item["logo"].ToString();
-                singleNews.HtmlContent = item["htmlContent"].ToString();
-                singleNews.PublishDate = item["PublishDate"].ToString();
-                News.Add(singleNews);
-            }
-            return View(News);
         }
 
 

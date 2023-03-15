@@ -30,6 +30,25 @@ namespace Ali_Jameel.Models
             return table;
         }
 
+        public bool ExecuteUpdateQuery(string query)
+        {
+            Mysql mysqlConnProp = new Mysql();
+            bool ok = false;
+            if (mysqlConnProp.OpenConnection())
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, mysqlConnProp.Connection);
+                //Create a data reader and Execute the command
+                int rowsnumber = cmd.ExecuteNonQuery();
+                mysqlConnProp.CloseConnection();
+                if (rowsnumber > -1)
+                {
+                    ok = true;
+                }
+            }
+            return ok;
+        }
+
         public bool ExecuteInsertQuery(string query)
         {
             Mysql mysqlConnProp = new Mysql();
