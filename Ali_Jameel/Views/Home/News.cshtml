@@ -22,7 +22,7 @@
                             </div>
 
                             <div>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick="SetSession(@item.ID)">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick="SetSession(@item.ID)" style="display:@System.Web.HttpContext.Current.Session["Display"]">
                                     <img src="~/Content/Logos/delete (1).png" style="width:20px;height:20px;" />
                                 </button>
                             </div>

@@ -21,12 +21,21 @@ namespace Ali_Jameel.Controllers
         public ActionResult SignIn(User user)
         {
             
-            Tuple<bool,string> ok = user.SignIn();
+            Tuple<bool,string , string > ok = user.SignIn();
             if (ok.Item1)
             {
                 System.Web.HttpContext.Current.Session["Username"] = ok.Item2;
-                //TempData["Username"] = ok.Item2;
-                return RedirectToAction("news", "Home");
+
+                if(ok.Item3=="False")
+                {
+                    System.Web.HttpContext.Current.Session["Display"] = "none";
+                }
+                else
+                {
+                    System.Web.HttpContext.Current.Session["Display"] = "";
+                }
+
+                return RedirectToAction("index", "Home");
             }
             else
             {
@@ -58,5 +67,21 @@ namespace Ali_Jameel.Controllers
             return RedirectToAction("index", "Login");
         }
 
+
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            System.Web.HttpContext.Current.Session.Abandon();
+            return RedirectToAction("Index", "Login");
+        }
+
+
+        [HttpGet]
+        string Display()
+        {
+
+            return "";
+        }
     }
 }

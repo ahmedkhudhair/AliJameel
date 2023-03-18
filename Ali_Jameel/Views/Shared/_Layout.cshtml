@@ -16,15 +16,43 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="">@System.Web.HttpContext.Current.Session["Username"] </a>
+        <a class="navbar-brand" href="@Url.Action("index", "Home")">@System.Web.HttpContext.Current.Session["Username"] </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li><label style="color:black;">@Html.ActionLink("Vendors", "Vendors", null, new { @class = "btn" })</label></li>
-                <li><label style="color:black;">@Html.ActionLink("News", "News", null, new { @class = "btn" })</label></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        News
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("News", "Home")">News</a>
+                        <a class="dropdown-item" href="@Url.Action("CreateNews", "Home")" style="display:@System.Web.HttpContext.Current.Session["Display"]">Create News</a>
+                    </div>
+
+                </li>
+
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Vendors
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("Vendors", "Home")">Vendors</a>
+                        <a class="dropdown-item" href="@Url.Action("CreateVendors", "Home")" style="display:@System.Web.HttpContext.Current.Session["Display"]">Create Vendor</a>
+                    </div>
+
+                </li>
+
             </ul>
+        </div>
+
+        <div class="my-2 my-lg-0">
+            @Html.ActionLink("logout", "Logout", "Login")
+            <img src="~/Content/Logos/icons8-logout-rounded-48.png" width="25" height="25" />
+
         </div>
     </nav>
     <div class="">

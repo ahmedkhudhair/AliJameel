@@ -76,19 +76,19 @@ namespace Ali_Jameel.Models
 
         DBMS db = new DBMS();
 
-        public Tuple<bool,string> SignIn()
+        public Tuple<bool,string , string> SignIn()
         {
             
             try
             {
-                var table = db.ExecuteSelectQuery($"select username from user where email = '{Email}' and password = '{Password}'");
+                var table = db.ExecuteSelectQuery($"select username , role from user where email = '{Email}' and password = '{Password}'");
                 if (table.Rows.Count > 0)
                 {
-                    return Tuple.Create(true, table.Rows[0]["username"].ToString());
+                    return Tuple.Create(true, table.Rows[0]["username"].ToString() , table.Rows[0]["role"].ToString());
                 }
                 else
                 {
-                    return Tuple.Create(false, "");
+                    return Tuple.Create(false, "","");
 
                 }
                 

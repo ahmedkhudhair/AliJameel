@@ -65,7 +65,15 @@ namespace Ali_Jameel.Controllers
         [HttpGet]
         public ActionResult CreateVendors()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         [HttpPost]
@@ -73,13 +81,21 @@ namespace Ali_Jameel.Controllers
         {
 
             DBMS db = new DBMS();
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
+            {
+                var filename = Path.GetFileName(vendor.LogoPath.FileName);
+                var path = Path.Combine(Server.MapPath("~/Content/Logos/"), filename);
+                vendor.LogoPath.SaveAs(path);
 
-            var filename = Path.GetFileName(vendor.LogoPath.FileName);
-            var path = Path.Combine(Server.MapPath("~/Content/Logos/"), filename);
-            vendor.LogoPath.SaveAs(path);
+                bool ok = db.ExecuteInsertQuery($" insert into vendor (CompanyName,CompanyLogo) values ('{vendor.CompanyName}' ,'{vendor.LogoPath.FileName}')");
+                return View();
+            }
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
+            }
 
-            bool ok = db.ExecuteInsertQuery($" insert into vendor (CompanyName,CompanyLogo) values ('{vendor.CompanyName}' ,'{vendor.LogoPath.FileName}')");
-            return View();
         }
 
 
@@ -127,23 +143,45 @@ namespace Ali_Jameel.Controllers
     [HttpGet]
         public ActionResult CreateNews()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
+            }
         }
 
 
         [HttpPost]
         public ActionResult CreateNews(News News)
         {
-            if (ModelState.IsValid)
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
             {
-                var filename = Path.GetFileName(News.LogoPath.FileName);
-                var path = Path.Combine(Server.MapPath("~/Content/News/logos/"), filename);
-                News.LogoPath.SaveAs(path);
-                //News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
-                DBMS db = new DBMS();
-                bool ok = db.ExecuteInsertQuery(News);
+
+                if (ModelState.IsValid)
+                {
+                    var filename = Path.GetFileName(News.LogoPath.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/News/logos/"), filename);
+                    News.LogoPath.SaveAs(path);
+                    //News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
+                    DBMS db = new DBMS();
+                    bool ok = db.ExecuteInsertQuery(News);
+                }
+                return View();
             }
-            return View();
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
+            }
         }
+
+
+
+        
+
     }
 }
