@@ -335,6 +335,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Calculator.cs" />
     <Compile Include="Models\DBMS.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\User.cs" />
@@ -498,6 +499,7 @@
     <Content Include="Views\Home\News_.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Home\Vendors.cshtml" />
+    <Content Include="Views\Home\Calculator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

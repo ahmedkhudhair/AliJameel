@@ -75,13 +75,5 @@ namespace Ali_Jameel.Controllers
             System.Web.HttpContext.Current.Session.Abandon();
             return RedirectToAction("Index", "Login");
         }
-
-
-        [HttpGet]
-        string Display()
-        {
-
-            return "";
-        }
     }
 }

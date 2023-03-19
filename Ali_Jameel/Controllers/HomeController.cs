@@ -180,8 +180,12 @@ namespace Ali_Jameel.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult Calculator()
+        {
+            return View();
+        }
 
-        
 
     }
 }
