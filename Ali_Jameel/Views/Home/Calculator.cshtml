@@ -12,44 +12,87 @@
         <tbody>
             <tr>
                 <td>System Size</td>
-                <td><input id="SystemSize" type="text" /></td>
+                <td><input id="SystemSize" type="number" /></td>
                 <td> Saving Per Month</td>
-                <td><label></label></td>
+                <td><input id="SavingPerMonth" type="text" disabled /></td>
             </tr>
             <tr>
                 <td>Installation Cost</td>
-                <td><input id="InstallationCost" type="text" /></td>
+                <td><input id="InstallationCost" type="number" /></td>
                 <td>PayBack Period</td>
-                <td><label></label></td>
+                <td><input id="PayBackPeriod" type="text" disabled /></td>
             </tr>
             <tr>
                 <td>Electricity Cost</td>
-                <td><input id="ElectricityCost" type="text" /></td>
+                <td><input id="ElectricityCost" type="number" /></td>
                 <td>Total Saving</td>
-                <td><label></label></td>
+                <td><input id="TotalSaving" type="text" disabled /></td>
             </tr>
 
             <tr>
                 <td>Time Period</td>
-                <td><input id="TimePeriod" type="text" /></td>
+                <td><input id="TimePeriod" type="number" /></td>
                 <td> Baterry Saving </td>
-                <td><label></label></td>
+                <td><input id="BaterrySaving" type="text" disabled /></td>
             </tr>
 
             <tr>
                 <td>Battery Cost</td>
-                <td><input id="BatteryCost" type="text" /></td>
+                <td><input id="BatteryCost" type="number" /></td>
                 <td>Battery Payback Period</td>
-                <td><label></label></td>
+                <td><input id="BatteryPaybackPeriod" type="text" disabled /></td>
             </tr>
 
+           
         </tbody>
     </table>
 
     <div class="container">
         <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-primary">Calculate</button>
+            <button type="button" class="btn btn-primary" onclick="Calculate()">Calculate</button>
             
         </div>
     </div>
 </div>
+
+<script>
+
+    function Calculate() {
+        //alert("test");
+        var SystemSize = document.getElementById("SystemSize").value;
+        var InstallationCost = document.getElementById("InstallationCost").value;
+        var ElectricityCost = document.getElementById("ElectricityCost").value;
+        var TimePeriod = document.getElementById("TimePeriod").value;
+        var BatteryCost = document.getElementById("BatteryCost").value;
+        //var SavingPerMonth = document.getElementById("SavingPerMonth").value;
+
+        if (SystemSize == "" || InstallationCost == "" || ElectricityCost == "" || TimePeriod == "" || BatteryCost == "") {
+            alert("Invalid input values. Please enter valid numbers.");
+        }
+        else {
+
+            var SavingPerMonth = document.getElementById("SavingPerMonth").value;
+            SavingPerMonth = (((SystemSize * 4.2 * 30 * ElectricityCost) / 1000)).toFixed(2);
+
+            //Calculate monthly savings
+            document.getElementById("SavingPerMonth").value = SavingPerMonth + " BHD";
+            //alert("SavingPerMonth" + SavingPerMonth)
+            //Calculate payback period
+            document.getElementById("PayBackPeriod").value = (InstallationCost / SavingPerMonth).toFixed(2) + " Months";
+            //alert("PayBackPeriod" + PayBackPeriod)
+
+            //Calculate total savings
+            document.getElementById("TotalSaving").value = (SavingPerMonth * TimePeriod).toFixed(2) + " BHD";
+            //alert("TotalSaving" + TotalSaving)
+
+            //Calculate battery savings 
+            document.getElementById("BaterrySaving").value = ((SavingPerMonth * 0.3) - (BatteryCost / TimePeriod)).toFixed(2) + " BHD" ;
+            //alert("BaterrySaving" + BaterrySaving)
+
+            //Calculate payback period
+            document.getElementById("BatteryPaybackPeriod").value = (BatteryCost / (SavingPerMonth * 0.3)).toFixed(2) + " Months";
+            //alert("BatteryPaybackPeriod" + BatteryPaybackPeriod)
+
+        }
+    }
+</script>

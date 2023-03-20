@@ -67,6 +67,7 @@ namespace Ali_Jameel.Controllers
         {
             if (System.Web.HttpContext.Current.Session["Username"] != null)
             {
+
                 return View();
             }
             else
@@ -83,11 +84,13 @@ namespace Ali_Jameel.Controllers
             DBMS db = new DBMS();
             if (System.Web.HttpContext.Current.Session["Username"] != null)
             {
-                var filename = Path.GetFileName(vendor.LogoPath.FileName);
-                var path = Path.Combine(Server.MapPath("~/Content/Logos/"), filename);
-                vendor.LogoPath.SaveAs(path);
-
-                bool ok = db.ExecuteInsertQuery($" insert into vendor (CompanyName,CompanyLogo) values ('{vendor.CompanyName}' ,'{vendor.LogoPath.FileName}')");
+                if (ModelState.IsValid)
+                {
+                    var filename = Path.GetFileName(vendor.LogoPath.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/Logos/"), filename);
+                    vendor.LogoPath.SaveAs(path);
+                    bool ok = db.ExecuteInsertQuery($" insert into vendor (CompanyName,CompanyLogo,CompanyURL,Email,Address,ContactNumber) values ('{vendor.CompanyName}' ,'{vendor.LogoPath.FileName}','{vendor.CompanyURL}','{vendor.Email}','{vendor.Address}','{vendor.ContactNumber}')");
+                }
                 return View();
             }
             else
@@ -183,7 +186,15 @@ namespace Ali_Jameel.Controllers
         [HttpGet]
         public ActionResult Calculator()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
+            }
         }
 
 

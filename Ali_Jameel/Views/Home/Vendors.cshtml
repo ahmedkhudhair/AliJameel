@@ -17,7 +17,7 @@
                         </div>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="SetVendor('@item.CompanyName','@item.CompanyURL', '@item.Email' , '@item.Address' , '@item.ContactNumber')">
-                            info
+                            Info
                         </button>
 
                         <!-- Modal 2 -->
@@ -27,16 +27,18 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">
-                                            <div onload="alert('e')"></div>
+                                            <div></div>
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <script>
-                                            sessionStorage.getItem("email")
-                                        </script>
+                                        <div id="companyname"></div>
+                                        <div id="companyurl"></div>
+                                        <div id="email"></div>
+                                        <div id="address"></div>
+                                        <div id="contactnumber"></div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -82,10 +84,9 @@
         
         <script>
 
-
-                function SetSession(id) {
-                    sessionStorage.setItem("key", id);
-                }
+            function SetSession(id) {
+                sessionStorage.setItem("key", id);
+            }
 
             function GetID() {
 
@@ -107,11 +108,11 @@
 
 
             function SetVendor(companyname,companyurl,email,address,contactnumber) {
-                sessionStorage.setItem("companyname", companyname);
-                sessionStorage.setItem("companyurl", companyurl);
-                sessionStorage.setItem("email", email);
-                sessionStorage.setItem("address", address);
-                sessionStorage.setItem("contactnumber", contactnumber);
+                document.getElementById('companyname').innerHTML = ' Company Name : ' + companyname;
+                document.getElementById('companyurl').innerHTML = 'Company URL : ' +companyurl;
+                document.getElementById('email').innerHTML = 'Email : '+ email;
+                document.getElementById('address').innerHTML = 'Address : ' + address;
+                document.getElementById('contactnumber').innerHTML = 'Contact Number: ' + contactnumber;
             }
         </script>
 
