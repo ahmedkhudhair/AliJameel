@@ -1,0 +1,61 @@
+﻿@model List<Ali_Jameel.Models.User>
+<div>
+
+    <div style="padding-top: 25px;"></div>
+    <table class="table table-bordered table-sm" style=" width: 30%; ">
+        <tbody>
+
+            <script>
+                var object = [];
+            </script>
+            @foreach (var item in Model)
+            {
+                if (item.UserName != "")
+                {
+                    <tr>
+                        <td class="w-20">@item.UserName</td>
+                        <td class="w-20"><input id="@item.UserName" type="checkbox" /></td>
+                    </tr>
+                    <script>
+
+                        object.push({ "username": "@item.UserName" , "isadmin": "@item.IsAdmin" });
+
+                        var item = "@item.IsAdmin".toLowerCase();
+                        if (item === "true") {
+                            document.getElementById("@item.UserName").setAttribute("checked", "");
+                        }
+                    </script>
+                }
+            }
+
+
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary" onclick="Permit()">Permit</button>
+    
+    <script>
+        function Permit() {
+
+            let all = Object.keys(object);
+
+            all.forEach((item) => {
+                alert(JSON.stringify(`${object[item]}`));
+            })
+
+            //alert(object);
+            @*$.ajax({
+                url: '@Url.Action("DeleteNews", "Home")',
+                type: 'GET',
+                data: { newsID: sessionStorage.getItem("key") },
+                success: function (data) {
+                    window.location.reload(true);
+                },
+                error: function (xhr, status, error) {
+                    alert( ' non no no ' + xhr.responseText);
+                }
+            });*@
+
+        }
+    </script>
+</div>

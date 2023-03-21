@@ -14,8 +14,16 @@ namespace Ali_Jameel.Controllers
     {
         public ActionResult Index()
         {
-
-            return View();
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
+            }
+          
         }
 
         [HttpGet]
@@ -195,6 +203,42 @@ namespace Ali_Jameel.Controllers
                 //return View();
                 return RedirectToAction("Index", "Login");
             }
+        }
+
+
+
+        [HttpGet]
+        public ActionResult Users()
+        {
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
+            {
+
+                DBMS db = new DBMS();
+                DataTable table = db.ExecuteSelectQuery("select * from user");
+
+                List<User> Users = new List<User>();
+                foreach (DataRow item in table.Rows)
+                {
+                    User User = new User();
+                    User.UserName = item["username"].ToString();
+                    User.IsAdmin = match(item["role"].ToString());
+                    Users.Add(User);
+                }
+                    return View(Users);
+            }
+            else
+            {
+                //return View();
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+        bool match(string role)
+        {
+            if (role == "True")
+                return true;
+            else
+                return false;
         }
 
 

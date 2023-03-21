@@ -21,7 +21,7 @@ namespace Ali_Jameel.Controllers
         public ActionResult SignIn(User user)
         {
             
-            Tuple<bool,string , string > ok = user.SignIn();
+            Tuple<bool,string , string , string > ok = user.SignIn();
             if (ok.Item1)
             {
                 System.Web.HttpContext.Current.Session["Username"] = ok.Item2;
@@ -33,6 +33,17 @@ namespace Ali_Jameel.Controllers
                 else
                 {
                     System.Web.HttpContext.Current.Session["Display"] = "";
+                }
+
+                // master admin
+                if (ok.Item4 == "1")
+                {
+                    System.Web.HttpContext.Current.Session["AdminDisplay"] = "";
+                }
+                else
+                {
+                    System.Web.HttpContext.Current.Session["AdminDisplay"] = "none";
+
                 }
 
                 return RedirectToAction("index", "Home");

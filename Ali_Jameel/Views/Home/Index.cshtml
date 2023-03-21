@@ -1,4 +1,20 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<h1>Welcome @System.Web.HttpContext.Current.Session["Username"]</h1>
+
+
+<div class="row row-cols-1 row-cols-md-16 g-2" style="padding:50px;">
+
+    <div class="col">
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="~/Content/Logos/MOHD LOGO copy.png" class="card-img-top" width="50" height="350" />
+
+                <div class="card-body">
+                    <h1>Welcome @System.Web.HttpContext.Current.Session["Username"]</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

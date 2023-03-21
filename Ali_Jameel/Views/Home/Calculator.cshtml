@@ -50,7 +50,7 @@
     <div class="container">
         <div class="col-md-12 text-center">
             <button type="button" class="btn btn-primary" onclick="Calculate()">Calculate</button>
-            
+            <button type="button" class="btn btn-primary" onclick="Reset()">Reset</button>
         </div>
     </div>
 </div>
@@ -71,8 +71,8 @@
         }
         else {
 
-            var SavingPerMonth = document.getElementById("SavingPerMonth").value;
-            SavingPerMonth = (((SystemSize * 4.2 * 30 * ElectricityCost) / 1000)).toFixed(2);
+            //var SavingPerMonth = document.getElementById("SavingPerMonth").value;
+            var SavingPerMonth = (((SystemSize * 4.2 * 30 * ElectricityCost) / 1000)).toFixed(2);
 
             //Calculate monthly savings
             document.getElementById("SavingPerMonth").value = SavingPerMonth + " BHD";
@@ -95,4 +95,20 @@
 
         }
     }
+
+    function Reset() {
+
+        document.getElementById("SystemSize").value = "";
+        document.getElementById("InstallationCost").value = "";
+        document.getElementById("ElectricityCost").value = "";
+        document.getElementById("TimePeriod").value = "";
+        document.getElementById("BatteryCost").value = "";
+        document.getElementById("SavingPerMonth").value = "";
+        document.getElementById("PayBackPeriod").value = "";
+        document.getElementById("TotalSaving").value = "";
+        document.getElementById("BaterrySaving").value = "";
+        document.getElementById("BatteryPaybackPeriod").value = "";
+    }
+    
+
 </script>

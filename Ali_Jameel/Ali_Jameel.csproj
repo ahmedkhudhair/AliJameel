@@ -440,6 +440,10 @@
     <Content Include="Content\Logos\download.jfif" />
     <Content Include="Content\Logos\icons8-logout-rounded-48.png" />
     <Content Include="Content\Logos\list.png" />
+    <Content Include="Content\Logos\MOHD LOGO copy 2.png" />
+    <Content Include="Content\Logos\MOHD LOGO copy.png" />
+    <Content Include="Content\Logos\MOHD LOGO hid.png" />
+    <Content Include="Content\Logos\MOHD LOGO hid1.png" />
     <Content Include="Content\Logos\Picture_–_Heathen_Rock_Festival_2016_08.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -499,6 +503,7 @@
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Home\Vendors.cshtml" />
     <Content Include="Views\Home\Calculator.cshtml" />
+    <Content Include="Views\Home\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
