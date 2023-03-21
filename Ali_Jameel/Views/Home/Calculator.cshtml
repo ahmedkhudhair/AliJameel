@@ -71,9 +71,8 @@
         }
         else {
 
-            var SavingPerMonth = document.getElementById("SavingPerMonth").value;
-            SavingPerMonth = (((SystemSize * 4.2 * 30 * ElectricityCost) / 1000)).toFixed(2);
-
+            var SavingPerMonth = (((SystemSize * 4.2 * 30 * ElectricityCost) / 1000)).toFixed(2);
+            
             //Calculate monthly savings
             document.getElementById("SavingPerMonth").value = SavingPerMonth + " BHD";
             //alert("SavingPerMonth" + SavingPerMonth)
