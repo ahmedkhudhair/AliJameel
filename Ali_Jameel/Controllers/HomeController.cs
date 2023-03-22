@@ -98,6 +98,7 @@ namespace Ali_Jameel.Controllers
                     var path = Path.Combine(Server.MapPath("~/Content/Logos/"), filename);
                     vendor.LogoPath.SaveAs(path);
                     bool ok = db.ExecuteInsertQuery($" insert into vendor (CompanyName,CompanyLogo,CompanyURL,Email,Address,ContactNumber) values ('{vendor.CompanyName}' ,'{vendor.LogoPath.FileName}','{vendor.CompanyURL}','{vendor.Email}','{vendor.Address}','{vendor.ContactNumber}')");
+                    ModelState.Clear();
                 }
                 return View();
             }
@@ -116,7 +117,7 @@ namespace Ali_Jameel.Controllers
             if (System.Web.HttpContext.Current.Session["Username"] != null)
             {
                 DBMS db = new DBMS();
-                DataTable table = db.ExecuteSelectQuery("select * from News");
+                DataTable table = db.ExecuteSelectQuery("select * from News order by PublishDate DESC");
 
                 List<News> News = new List<News>();
                 foreach (DataRow item in table.Rows)
@@ -151,7 +152,7 @@ namespace Ali_Jameel.Controllers
         }
 
 
-    [HttpGet]
+         [HttpGet]
         public ActionResult CreateNews()
         {
             if (System.Web.HttpContext.Current.Session["Username"] != null)
@@ -174,12 +175,14 @@ namespace Ali_Jameel.Controllers
 
                 if (ModelState.IsValid)
                 {
+                  
                     var filename = Path.GetFileName(News.LogoPath.FileName);
                     var path = Path.Combine(Server.MapPath("~/Content/News/logos/"), filename);
                     News.LogoPath.SaveAs(path);
                     //News.HtmlContent = News.Make_HTTP_Request(News.WebsiteLink);
                     DBMS db = new DBMS();
                     bool ok = db.ExecuteInsertQuery(News);
+                    ModelState.Clear();
                 }
                 return View();
             }
@@ -205,6 +208,21 @@ namespace Ali_Jameel.Controllers
             }
         }
 
+
+
+        [HttpGet]
+        public ActionResult About()
+        {
+            if (System.Web.HttpContext.Current.Session["Username"] != null)
+            {
+                return View();
+            }
+            else
+            {
+               
+                return RedirectToAction("Index", "Login");
+            }
+        }
 
 
         [HttpGet]
@@ -241,6 +259,13 @@ namespace Ali_Jameel.Controllers
                 return false;
         }
 
-
+        [HttpGet]
+        public bool Permit(string Username , string Role)
+        {
+            DBMS db = new DBMS();
+            bool ok = db.ExecuteUpdateQuery($" UPDATE user SET Role = '{Role}' WHERE username = '{Username}' ");
+            return true;
+        }
+        
     }
 }

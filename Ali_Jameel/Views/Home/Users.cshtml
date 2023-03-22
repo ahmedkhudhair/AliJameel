@@ -14,11 +14,34 @@
                 {
                     <tr>
                         <td class="w-20">@item.UserName</td>
-                        <td class="w-20"><input id="@item.UserName" type="checkbox" /></td>
+                        <td class="w-20"><input id="@item.UserName" type="checkbox" onchange="handleClick(this);" /></td>
                     </tr>
                     <script>
 
-                        object.push({ "username": "@item.UserName" , "isadmin": "@item.IsAdmin" });
+                        function handleClick(obj) {
+                            //alert(obj.id + "  " + obj.checked)
+
+                            var checked;
+                            if (obj.checked == true) {
+                                checked = "1";
+                            }
+                            else {
+                                checked = "0";
+
+                            }
+
+                             $.ajax({
+                                url: '@Url.Action("Permit", "Home")',
+                                type: 'GET',
+                                 data: { Username: obj.id, Role: checked },
+                                success: function (data) {
+                                    window.location.reload(true);
+                                },
+                                error: function (xhr, status, error) {
+                                    alert(' non no no ' + xhr.responseText);
+                                }
+                            });
+                        }
 
                         var item = "@item.IsAdmin".toLowerCase();
                         if (item === "true") {
@@ -32,30 +55,6 @@
         </tbody>
     </table>
 
-    <button type="button" class="btn btn-primary" onclick="Permit()">Permit</button>
+    @*<button type="button" class="btn btn-primary" onclick="Permit()">Permit</button>*@
     
-    <script>
-        function Permit() {
-
-            let all = Object.keys(object);
-
-            all.forEach((item) => {
-                alert(JSON.stringify(`${object[item]}`));
-            })
-
-            //alert(object);
-            @*$.ajax({
-                url: '@Url.Action("DeleteNews", "Home")',
-                type: 'GET',
-                data: { newsID: sessionStorage.getItem("key") },
-                success: function (data) {
-                    window.location.reload(true);
-                },
-                error: function (xhr, status, error) {
-                    alert( ' non no no ' + xhr.responseText);
-                }
-            });*@
-
-        }
-    </script>
 </div>

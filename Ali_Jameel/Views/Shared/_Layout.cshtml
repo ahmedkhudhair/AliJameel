@@ -23,9 +23,17 @@
                     <div class="col">
                         <img src="~/Content/Logos/MOHD LOGO hid.png" width="80" height="80" />
                     </div>
+
                     <div class="col">
-                        Welcome @System.Web.HttpContext.Current.Session["Username"]
+                        <img src="~/Content/Logos/MOHD LOGO hid1.png" width="270" height="60" />
                     </div>
+
+                    <div class="col">
+                        <label style="font-size:15px;">
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Welcome @System.Web.HttpContext.Current.Session["Username"] &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        </label>
+                    </div>
+
                 </div>
             </div>
         </a>
@@ -34,7 +42,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" style="padding-left:400px;">
+            <ul class="navbar-nav" style="">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         News
@@ -62,6 +70,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown" href="@Url.Action("Calculator", "Home")">Calculator</a>
                 </li>
+
+                <li class="nav-item dropdown" style="display:@System.Web.HttpContext.Current.Session["AdminDisplay"]">
+                    <a class="nav-link dropdown" href="@Url.Action("About", "Home")">About Us</a>
+                </li>
+
 
                 <li class="nav-item dropdown" style="display:@System.Web.HttpContext.Current.Session["AdminDisplay"]">
                     <a class="nav-link dropdown" href="@Url.Action("Users", "Home")">Users</a>
